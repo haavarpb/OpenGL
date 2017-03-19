@@ -30,7 +30,7 @@ def InitGL(Width, Height):
         glShadeModel(GL_SMOOTH)   
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluPerspective(45.0, float(Width)/float(Height), 0.1, 100.0)
+        gluPerspective(60.0, float(Width)/float(Height), 0.1, 100.0)
         glMatrixMode(GL_MODELVIEW)
  
 def keyPressed(*args):
@@ -78,6 +78,21 @@ def createCube(scale = 1, scaleX = 1, scaleY = 1, scaleZ = 1):
 	glVertex3d(-scaleX * scale  , scaleY * scale  , scaleZ * scale)
 	glVertex3d(-scaleX * scale  , -scaleY * scale  , scaleZ * scale)
 	glEnd()
+
+
+def finger(firstAngel, secondAngel, thirdAngel, hight):
+	glRotatef(firstAngel, 1, 0, 0)
+	createCube(1, 0.13, 0.2, hight)
+	glRotatef(secondAngel, 1, 0, 0)
+	glTranslatef(0, 0, hight*2)
+	createCube(1, 0.13, 0.2, hight)
+	glRotatef(thirdAngel, 1, 0, 0)
+	glTranslatef(0, 0, hight*2)
+	createCube(1, 0.13, 0.2, hight)
+	#reste Angle
+	glTranslatef(0, 0, hight*2*2*-1)
+	glRotatef((firstAngel+secondAngel+thirdAngel)*-1, 1, 0, 0)
+	
  
  
 def DrawGLScene():
@@ -94,46 +109,21 @@ def DrawGLScene():
 	glRotatef(Z_AXIS,0.0,0.0,1.0)
 
 	createCube(1, 0.7, 0.3)
-	
+
 	glTranslatef(0.7 - 0.13, 0, 1.3)
-	glRotatef(anglePhalange1, 1, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
+	finger(20,20,20,.3)
 	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
+	finger(0,0,0,.3)
 	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
+	finger(0,0,0,.3)
 	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
+	finger(10,10,10,.3)
 	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
+	finger(0,10,20,.2)
 
-	glTranslatef(1.2, 0, 0.6)
-	glRotatef(anglePhalange2, 1, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-
-	glTranslatef(1.2, 0, 0.6)
-	glRotatef(anglePhalange3, 1, 0, 0)
-	#createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-	glTranslatef(-0.30, 0, 0)
-	createCube(1, 0.13, 0.2, 0.3)
-
-
-	X_AXIS = X_AXIS - 0.30
-	Z_AXIS = Z_AXIS - 0.30
+	X_AXIS = X_AXIS + .30
+	#Y_AXIS = Y_AXIS + .3
+	Z_AXIS = Z_AXIS + .3
 
 	glutSwapBuffers()
  
@@ -148,7 +138,7 @@ def main():
         glutInitWindowSize(640,480)
         glutInitWindowPosition(200,200)
 
-        window = glutCreateWindow('OpenGL Python Cube')
+        window = glutCreateWindow('OpenGL Python Hand')
  
         glutDisplayFunc(DrawGLScene)
         glutIdleFunc(DrawGLScene)
